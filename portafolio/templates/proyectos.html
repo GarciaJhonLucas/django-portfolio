@@ -1,0 +1,31 @@
+<!-- Projects -->
+<div id="projects" class="basic-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="h2-heading">Proyectos realizados</h2>
+                <p class="p-heading">A continuación se enumeran algunos de los proyectos más representativos en los que
+                    he trabajado. En desde diseño web básico para sitios de presentación hasta desarrollo web avanzado
+                    para tiendas online</p>
+            </div>
+        </div>
+        <div class="row">
+            {% for proyecto in proyectos %}
+            <div class="col-lg-4">
+                <div class="text-container">
+                    <div class="image-container">
+                        <a href="{{ proyecto.url_github }}">
+                            <img class="img-fluid" src="{{ proyecto.foto.url }}">
+                        </a>
+                    </div>
+                    <p><strong>Titulo:</strong> {{ proyecto.titulo }} <br>
+                        <strong>Projecto:</strong> {{ proyecto.descripcion }} <a class="blue"
+                            href="{{ proyecto.url_github }}">details</a><br>
+                        <strong>Tags:</strong> {{ proyecto.tags }}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
