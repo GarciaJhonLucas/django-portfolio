@@ -11,7 +11,23 @@ def home(request):
 
 @login_required(login_url='login')
 def create(request):
-    return render(request, 'create.html')
+    if request.method == 'POST':
+        titulo = request.POST['ctitulo']
+        descripcion = request.POST['cdescripcion']
+        tags = request.POST['ctags']
+        imagen = request.FILES.get('cimagen')
+        url_pryecto = request.POST['curlproyecto']
+        
+        if Proyecto.objects.filter(url_github=url_pryecto).exists():
+            messages.warning(request, 'La URL del proyecto ya se registro')
+            return redirect('create')
+        else:
+            proyecto = Proyecto(foto=imagen, titulo=titulo, descripcion=descripcion, tags=tags, url_github=url_pryecto)
+            proyecto.save()
+            messages.success(request, 'El proyecto se creo correctamente')
+            return redirect('create')
+    else:
+        return render(request, 'create.html')
 
 
 def logout(request):

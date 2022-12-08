@@ -11,4 +11,5 @@ class Proyecto(models.Model):
     tags = models.CharField(max_length=250, blank=False)
     url_github = models.URLField(blank=False)
     
-
+    def save(self, *args, **kwargs):
+        return super(Proyecto, self).save(*args, **kwargs)
