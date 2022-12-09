@@ -21,11 +21,13 @@
                 <form id="contactForm" action="" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control-input" id="cusuario" name="cusuario" required>
+                        {{ forms.usuario.errors }}
+                        {{ forms.usuario }}
                         <label class="label-control" for="cusuario">Usuario</label>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control-input" id="cpassword" name="cpassword" required>
+                        {{ forms.contrasenia.errors }}
+                        {{ forms.contrasenia }}
                         <label class="label-control" for="cpassword">Contraseña</label>
                     </div>
                     <div class="form-group">

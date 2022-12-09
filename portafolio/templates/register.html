@@ -21,23 +21,23 @@
                 <form id="contactForm" action="" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control-input" id="cusuario" name="cusuario" required
-                            autocomplete="off">
+                        {{ forms.usuario.errors }}
+                        {{ forms.usuario }}
                         <label class="label-control" for="cusuario">Usuario</label>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control-input" id="cmail" name="cmail" required
-                            autocomplete="off">
+                        {{ forms.correo.errors }}
+                        {{ forms.correo }}
                         <label class="label-control" for="cmail">Correo</label>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control-input" id="cpassword" name="cpassword" required
-                            autocomplete="off">
+                        {{ forms.contrasenia.errors }}
+                        {{ forms.contrasenia }}
                         <label class="label-control" for="cpassword">Contraseña</label>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control-input" id="cpasswords" name="cpasswords" required
-                            autocomplete="off">
+                        {{ forms.rep_contrasenia.errors }}
+                        {{ forms.rep_contrasenia }}
                         <label class="label-control" for="cpasswords">Repita Contraseña</label>
                     </div>
                     <div class="form-group">
