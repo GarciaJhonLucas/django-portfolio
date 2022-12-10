@@ -47,12 +47,12 @@ class RegisterForm(forms.Form):
         'id':'cmail'
     }))
     contrasenia = forms.CharField(
-        required=True, widget=forms.PasswordInput(attrs={
+        required=True, min_length=8, widget=forms.PasswordInput(attrs={
         'class':'form-control-input',
         'id':'cpassword'
     }))
     rep_contrasenia = forms.CharField(
-        required=True, widget=forms.PasswordInput(attrs={
+        required=True, min_length=8, widget=forms.PasswordInput(attrs={
         'class':'form-control-input',
         'id':'cpasswords'
     }))

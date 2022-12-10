@@ -21,7 +21,9 @@
                     <p><strong>Titulo:</strong> {{ proyecto.titulo }} <br>
                         <strong>Projecto:</strong> {{ proyecto.descripcion }} <a class="blue"
                             href="{{ proyecto.url_github }}">details</a><br>
-                        <strong>Tags:</strong> {{ proyecto.tags }}
+                        <strong>Tags:</strong> {% for item in proyecto.tags.split %}
+                        <span class="badge badge-primary">{{ item }}</span>
+                        {% endfor %}
                     </p>
                 </div>
             </div>
