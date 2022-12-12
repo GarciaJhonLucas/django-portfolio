@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-(a9ay98f+kl*-#(u#dh0%+5u1b_er_o_l9y&ezb0f3z8b13%df
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-portfolio-production-0e79.up.railway.app']
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
