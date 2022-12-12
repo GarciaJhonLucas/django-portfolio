@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'portafolio',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://django-portfolio-production-0e79.up.railway.app/']
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
