@@ -80,6 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'USER':'root',
+        'PASSWORD':'ykcYqQxxsWmJofd42Bkp',
+        'HOST':'containers-us-west-153.railway.app',
+        'PORT':'5901',
     }
 }
 
