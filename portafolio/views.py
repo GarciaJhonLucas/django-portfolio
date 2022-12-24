@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Proyecto
+from .models import Proyecto, Visitante
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -9,6 +9,16 @@ from .forms import CreateForm, LoginForm, RegisterForm
 def home(request):
     proyectos = Proyecto.objects.all()
     return render(request, 'index.html', {'proyectos': proyectos} )
+
+
+@login_required(login_url='login')
+def dashboard(request):
+    context={
+        "proyectos": Proyecto.objects.all(),
+        "cantidad": Proyecto.objects.count(),
+        "visitantes": Visitante.objects.count(),
+    }
+    return render(request, 'dashboard.html', context )
 
 
 @login_required(login_url='login')
@@ -23,7 +33,7 @@ def create(request):
             descripcion = request.POST.get('descripcion')
             tags = request.POST.get('tags')
             imagen =  request.FILES['cimagen']
-            url_github = request.POST.get('url_repo')
+            url_github = request.POST.get('url_github')
             
             if Proyecto.objects.filter(url_github=url_github).exists():
                 messages.warning(request, 'La URL del proyecto ya se registro')
@@ -32,12 +42,35 @@ def create(request):
                 proyecto = Proyecto(foto=imagen, titulo=titulo, descripcion=descripcion, tags=tags, url_github=url_github)
                 proyecto.save()
                 messages.success(request, 'El proyecto se creo correctamente')
-                return redirect('create')
+                return redirect('dashboard')
         else:
             messages.warning(request, create_form.errors)
             return redirect('create')
     else:
         return render(request, 'create.html', {'forms':formulario})
+
+
+@login_required(login_url='login')
+def edit(request, **kwargs):
+    formulario = CreateForm
+    proyectos = Proyecto.objects.get(id=kwargs['id'])
+    if request.method == 'POST':
+        try:
+            edit_form = CreateForm(request.POST, instance=proyectos)
+            edit_form.save()
+            return redirect('dashboard')
+        except ValueError:
+            return render(request, 'dashboard.html')
+    else:
+        formulario = CreateForm(instance=proyectos)
+        return render(request, 'edit.html', {'forms':formulario})
+
+
+@login_required(login_url='login')
+def delete(request, **kwargs):
+    proyectos = Proyecto.objects.get(id=kwargs['id'])
+    proyectos.delete()
+    return redirect('dashboard')
 
 
 @login_required(login_url='login')
@@ -60,13 +93,13 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None:
                 auth.login(request, user)
-                return redirect('create')
+                return redirect('dashboard')
             else:
                 messages.success(request, 'Los datos son invalidos')
                 return redirect('login')
         else:
             messages.warning(request, login_form.errors)
-            return redirect('create')
+            return redirect('dashboard')
     else:
         return render(request, 'login.html', {'forms':formulario})
           

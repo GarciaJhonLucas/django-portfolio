@@ -13,3 +13,10 @@ class Proyecto(models.Model):
     
     def save(self, *args, **kwargs):
         return super(Proyecto, self).save(*args, **kwargs)
+
+
+class Visitante(models.Model):
+    ip = models.GenericIPAddressField()
+
+    def __str__(self):
+        return self.ip

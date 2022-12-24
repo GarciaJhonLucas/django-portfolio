@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 CSRF_TRUSTED_ORIGINS = ['https://django-portfolio-production-0e79.up.railway.app']
 
 MIDDLEWARE = [
+    'portafolio.middleware.ip_register',
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -89,6 +90,14 @@ DATABASES = {
         'PORT':'5901',
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation

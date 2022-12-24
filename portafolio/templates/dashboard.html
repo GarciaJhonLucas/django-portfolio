@@ -1,0 +1,67 @@
+{% extends 'partials/layout.html' %}
+{% block contend %}
+
+<div class="container px-1 py-3" id="hanging-icons">
+    <h2 class="pb-2 border-bottom">Dashboard</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="card" style="margin-right: 1rem;">
+            <div class="card-header">
+                Proyectos
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Cantidad: {{ cantidad }} </h5>
+                <a href="/create" class="btn btn-primary">Crear nuevo proyecto</a>
+            </div>
+        </div>
+
+        <div class="card" style="margin-right: 1rem;">
+            <div class="card-header">
+                Visitantes:
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Numero: {{ visitantes }}</h5>
+            </div>
+        </div>
+    </div>
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Alerta:</strong> {{ message }}.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Tags</th>
+                    <th scope="col">Github</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for proyecto in proyectos %}
+                <tr>
+                    <th scope="row">{{ proyecto.id }}</th>
+                    <td>{{ proyecto.titulo }}</td>
+                    <td>{{ proyecto.descripcion }}</td>
+                    <td>{{ proyecto.tags }}</td>
+                    <td class="text">{{ proyecto.url_github }}</td>
+                    <td>
+                        <a href="{% url 'edit' proyecto.id %}" class="btn btn-success btn-sm">Editar</a>
+                        <a href="{% url 'delete' proyecto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

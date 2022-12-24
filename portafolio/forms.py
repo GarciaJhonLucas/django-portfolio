@@ -1,7 +1,7 @@
 from django import forms
 from .models import Proyecto
 
-class CreateForm(forms.Form):
+class CreateForm(forms.ModelForm):
     titulo = forms.CharField(required=True, widget=forms.TextInput(attrs={
         'class':'form-control-input',
         'id':'ctitulo'
@@ -17,11 +17,14 @@ class CreateForm(forms.Form):
         'id':'ctags'
     }))
 
-    url_repo = forms.CharField(
+    url_github = forms.CharField(
         required=True, widget=forms.URLInput(attrs={
         'class':'form-control-input',
         'id':'curlproyecto',
     }))
+    class Meta:
+        model = Proyecto
+        fields = ['titulo','descripcion','tags','url_github']
     
     
 class LoginForm(forms.Form):
